@@ -9,7 +9,6 @@ namespace WeatherApp
     public interface IWeather
     {
         string Date { get; }
-        string AverageTemperature { get; }
 
         void AddTemperature(string value);
         void AddTemperature(double value);
