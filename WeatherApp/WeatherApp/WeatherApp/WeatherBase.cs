@@ -17,8 +17,6 @@ namespace WeatherApp
         {
             Date=date;
         }
-
-        //public abstract void AddTemperature(string value);
         public void AddTemperature(string value)
         {
             if (int.TryParse(value, out int resultInt))
@@ -30,8 +28,6 @@ namespace WeatherApp
             else
                 throw new Exception("Temperature must be integer, float or double value.");
         }
-        // public abstract void AddTemperature(double value);
-        //public abstract void AddTemperature(int value);
         public void AddTemperature(double value)
         {
             float result = (float)value;
@@ -45,5 +41,6 @@ namespace WeatherApp
 
         public abstract void AddTemperature(float value);
         public abstract Statistics GetStatistics();
+        public abstract void PrintEvent(object sender, EventArgs args);
     }
 }

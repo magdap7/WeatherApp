@@ -10,7 +10,7 @@ namespace WeatherApp
         private const string fileName = "temperatures.txt";
         public WeatherInFile(string date) : base(date)
         {
-
+            TemperatureAdded += PrintEvent;
         }
         public override event TemperatureAddedDelegate TemperatureAdded;
 
@@ -54,6 +54,10 @@ namespace WeatherApp
             {
                 throw new Exception($"File {fileName} dosn't exist.");
             }
+        }
+        public override void PrintEvent(object sender, EventArgs args)
+        {
+            Console.WriteLine("Temperature value added to file.");
         }
     }
 }

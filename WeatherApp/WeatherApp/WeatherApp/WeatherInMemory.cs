@@ -7,6 +7,7 @@ namespace WeatherApp
         public WeatherInMemory(string date) : base(date)
         {
             m_list = new List<float>();
+            TemperatureAdded += PrintEvent;
         }
 
         public override event TemperatureAddedDelegate TemperatureAdded;
@@ -28,6 +29,10 @@ namespace WeatherApp
             Statistics result = new Statistics(m_list);
             result.CountStatistics();
             return result;
+        }
+        public override void PrintEvent(object sender, EventArgs args)
+        {
+            Console.WriteLine("Temperature value added to memory.");
         }
     }
 }
