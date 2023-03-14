@@ -3,10 +3,10 @@ namespace WeatherApp
 {
     public class WeatherInMemory : WeatherBase
     {
-        private List<float> m_list;
+        private List<float> _Temperatures;
         public WeatherInMemory(string date) : base(date)
         {
-            m_list = new List<float>();
+            _Temperatures = new List<float>();
             TemperatureAdded += PrintEvent;
         }
 
@@ -16,7 +16,7 @@ namespace WeatherApp
         {
             if (value>=-50 && value<=50)
             {
-                this.m_list.Add(value);
+                this._Temperatures.Add(value);
                 if (this.TemperatureAdded != null)
                     this.TemperatureAdded(this, new EventArgs());
             }
@@ -26,13 +26,21 @@ namespace WeatherApp
 
         public override Statistics GetStatistics()
         {
-            Statistics result = new Statistics(m_list);
-            result.CountStatistics();
-            return result;
+            if (_Temperatures.Count > 0)
+            {
+                Statistics result = new Statistics(_Temperatures);
+                result.CountStatistics();
+                return result;
+            }
+            else
+            {
+                throw new Exception("The list of temperature values is empty.");
+            }
+            
         }
         public override void PrintEvent(object sender, EventArgs args)
         {
-            Console.WriteLine("Temperature value added to memory.");
+            Console.WriteLine("Temperature value added to memory.\n");
         }
     }
 }

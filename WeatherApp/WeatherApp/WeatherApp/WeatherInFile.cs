@@ -31,7 +31,7 @@ namespace WeatherApp
 
         public override Statistics GetStatistics()
         {
-            var m_list = new List<float>();
+            var _Temperatures = new List<float>();
             if (File.Exists(fileName))
             {
                 using (var reader = File.OpenText(fileName))
@@ -40,15 +40,22 @@ namespace WeatherApp
                     while (line != null)
                     {
                         if (float.TryParse(line, out float value))
-                            m_list.Add(value);
+                            _Temperatures.Add(value);
                         else
                             throw new Exception("Invalid grade format in file {fileName}");
                         line = reader.ReadLine();
                     }
                 }
-                Statistics result = new Statistics(m_list);
-                result.CountStatistics();
-                return result;
+                if (_Temperatures.Count > 0)
+                {
+                    Statistics result = new Statistics(_Temperatures);
+                    result.CountStatistics();
+                    return result;
+                }
+                else
+                {
+                    throw new Exception("The list of temperature values is empty.");
+                }
             }
             else
             {
@@ -57,7 +64,7 @@ namespace WeatherApp
         }
         public override void PrintEvent(object sender, EventArgs args)
         {
-            Console.WriteLine("Temperature value added to file.");
+            Console.WriteLine("Temperature value added to file.\n");
         }
     }
 }

@@ -21,22 +21,15 @@ namespace WeatherApp
         }
         public void CountStatistics()
         {
-            if (this._Temperatures.Count == 0)
-            {
-                throw new Exception("Empty temperatures list");
-            }
-            else
-            {
-                this.Min = this._Temperatures.Min();
-                this.Max = this._Temperatures.Max();
-                this.Sum = this._Temperatures.Sum();
-                this.Count = this._Temperatures.Count();
-                this.Average = this._Temperatures.Average();
-            }
+            this.Min = this._Temperatures.Min();
+            this.Max = this._Temperatures.Max();
+            this.Sum = this._Temperatures.Sum();
+            this.Count = this._Temperatures.Count();
+            this.Average = this._Temperatures.Average();
         }
         public override string ToString()
         {
-            string result = "";
+            string result = "STATISTICS OF TEMPERATURES TODAY:\n";
             result = result + $"Min: {this.Min}\n";
             result = result + $"Max: {this.Max}\n";
             result = result + $"Sum: {this.Sum}\n";

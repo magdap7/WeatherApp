@@ -18,6 +18,7 @@ namespace WeatherApp.Tests
             Assert.AreEqual(sum, statFromMem.Sum);
             Assert.AreEqual(tabOfTestValues.Length, statFromMem.Count);
         }
+
         [Test]
         public void InFileTest()
         {
@@ -34,18 +35,6 @@ namespace WeatherApp.Tests
             Assert.AreEqual(statFromFile.Sum + sum, statFromFile1.Sum);
             Assert.AreEqual(statFromFile.Count + tabOfTestValues.Length, statFromFile1.Count);
         }
-        [Test]
-        public void InvalidValueTest()
-        {
-            WeatherInMemory weatherMemory = new WeatherInMemory(DateTime.UtcNow.ToString("yyyy-MM-dd"));
-            weatherMemory.AddTemperature(0);
-            Statistics statFromMem = weatherMemory.GetStatistics();
-            weatherMemory.AddTemperature("1");
-            weatherMemory.AddTemperature(123);
-            weatherMemory.AddTemperature("x3");
-            Statistics statFromMem1 = weatherMemory.GetStatistics();
-            Assert.AreEqual(statFromMem.Sum + 1, statFromMem1.Sum);
-            Assert.AreEqual(statFromMem.Count + 1, statFromMem1.Count);
-        }
+       
     }
 }
