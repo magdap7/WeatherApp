@@ -8,8 +8,8 @@ namespace WeatherApp
 {
     public abstract class WeatherBase : IWeather
     {
-        public delegate void TemperatureAddedDelegate(object sender, EventArgs args);
-        public abstract event TemperatureAddedDelegate TemperatureAdded;
+        protected delegate void TemperatureAddedDelegate(object sender, EventArgs args);
+        protected abstract event TemperatureAddedDelegate TemperatureAdded;
 
         public  string Date { get; private set; }
 

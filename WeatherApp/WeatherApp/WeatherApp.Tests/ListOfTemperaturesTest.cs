@@ -2,14 +2,14 @@ namespace WeatherApp.Tests
 {
     public class Tests
     {
-        float[] tabOfTestValues= new float[] { -10, 10, 13.3f};
+        float[] tabOfTestValues = new float[] { -10, 10, 13.3f };
 
         [Test]
         public void InMemoryTest()
         {
             WeatherInMemory weatherMemory = new WeatherInMemory(DateTime.UtcNow.ToString("yyyy-MM-dd"));
             float sum = 0;
-            for (int i = 0;i < tabOfTestValues.Length; i++)
+            for (int i = 0; i < tabOfTestValues.Length; i++)
             {
                 weatherMemory.AddTemperature(tabOfTestValues[i]);
                 sum += tabOfTestValues[i];
@@ -33,6 +33,19 @@ namespace WeatherApp.Tests
             Statistics statFromFile1 = weatherFile.GetStatistics();
             Assert.AreEqual(statFromFile.Sum + sum, statFromFile1.Sum);
             Assert.AreEqual(statFromFile.Count + tabOfTestValues.Length, statFromFile1.Count);
+        }
+        [Test]
+        public void InvalidValueTest()
+        {
+            WeatherInMemory weatherMemory = new WeatherInMemory(DateTime.UtcNow.ToString("yyyy-MM-dd"));
+            weatherMemory.AddTemperature(0);
+            Statistics statFromMem = weatherMemory.GetStatistics();
+            weatherMemory.AddTemperature("1");
+            weatherMemory.AddTemperature(123);
+            weatherMemory.AddTemperature("x3");
+            Statistics statFromMem1 = weatherMemory.GetStatistics();
+            Assert.AreEqual(statFromMem.Sum + 1, statFromMem1.Sum);
+            Assert.AreEqual(statFromMem.Count + 1, statFromMem1.Count);
         }
     }
 }

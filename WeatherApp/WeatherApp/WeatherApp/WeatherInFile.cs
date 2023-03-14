@@ -12,7 +12,7 @@ namespace WeatherApp
         {
             TemperatureAdded += PrintEvent;
         }
-        public override event TemperatureAddedDelegate TemperatureAdded;
+        protected override event TemperatureAddedDelegate TemperatureAdded;
 
         public override void AddTemperature(float value)
         {
