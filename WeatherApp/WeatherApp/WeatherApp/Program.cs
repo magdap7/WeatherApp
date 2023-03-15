@@ -55,8 +55,7 @@ static void AddValuesToMemory(string currentDate)
     try
     {
         Statistics statFromMem = weatherMemory.GetStatistics();
-        WriteLineColor(ConsoleColor.DarkMagenta, "\nTODAY: " + currentDate);
-        WriteLineColor(ConsoleColor.Blue, statFromMem.ToString());
+        PrintStatistiscAndQuit(currentDate, statFromMem.ToString());
     }
     catch (Exception ex)
     { WriteLineColor(ConsoleColor.Red, $"Exeption catched: {ex.Message}\n"); }
@@ -81,12 +80,18 @@ static void AddValuesToFile(string currentDate)
     try
     {
         Statistics statFromFile = weatherFile.GetStatistics();
-        WriteLineColor(ConsoleColor.DarkMagenta, "\nTODAY: " + currentDate);
-        WriteLineColor(ConsoleColor.Blue, statFromFile.ToString());
+        PrintStatistiscAndQuit(currentDate, statFromFile.ToString());
     }
     catch (Exception ex)
     { WriteLineColor(ConsoleColor.Red, $"Exeption catched: {ex.Message}\n"); }
 
+}
+static void PrintStatistiscAndQuit(string currentDate, string gotStatistics)
+{
+    WriteLineColor(ConsoleColor.DarkMagenta, "\nTODAY: " + currentDate);
+    WriteLineColor(ConsoleColor.Blue, gotStatistics);
+    Console.Write("\nPress any key to exit ... ");
+    Console.ReadKey();
 }
 
 
