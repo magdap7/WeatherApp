@@ -28,31 +28,22 @@ namespace WeatherApp
 
         public override Statistics GetStatistics()
         {
-            var temperatures = new List<float>();
             if (File.Exists(fileName))
             {
+                Statistics statistics = new Statistics();
                 using (var reader = File.OpenText(fileName))
                 {
                     var line = reader.ReadLine();
                     while (line != null)
                     {
                         if (float.TryParse(line, out float value))
-                            temperatures.Add(value);
+                            statistics.Add(value);
                         else
                             throw new Exception("Invalid grade format in file {fileName}");
                         line = reader.ReadLine();
                     }
                 }
-                if (temperatures.Count > 0)
-                {
-                    Statistics result = new Statistics(temperatures);
-                    result.CountStatistics();
-                    return result;
-                }
-                else
-                {
-                    throw new Exception("The list of temperature values is empty.");
-                }
+                return statistics;
             }
             else
             {

@@ -52,13 +52,8 @@ static void AddValuesToMemory(string currentDate)
         lineToMemory = Console.ReadLine();
     }
 
-    try
-    {
-        Statistics statFromMem = weatherMemory.GetStatistics();
-        PrintStatistiscAndQuit(currentDate, statFromMem.ToString());
-    }
-    catch (Exception ex)
-    { WriteLineColor(ConsoleColor.Red, $"Exeption catched: {ex.Message}\n"); }
+    Statistics statFromMem = weatherMemory.GetStatistics();
+    PrintStatistiscAndQuit(currentDate, statFromMem.ToString());
 }
 
 static void AddValuesToFile(string currentDate)
@@ -77,13 +72,8 @@ static void AddValuesToFile(string currentDate)
         lineToFile = Console.ReadLine();
     }
 
-    try
-    {
-        Statistics statFromFile = weatherFile.GetStatistics();
-        PrintStatistiscAndQuit(currentDate, statFromFile.ToString());
-    }
-    catch (Exception ex)
-    { WriteLineColor(ConsoleColor.Red, $"Exeption catched: {ex.Message}\n"); }
+    Statistics statFromFile = weatherFile.GetStatistics();
+    PrintStatistiscAndQuit(currentDate, statFromFile.ToString());
 
 }
 static void PrintStatistiscAndQuit(string currentDate, string gotStatistics)

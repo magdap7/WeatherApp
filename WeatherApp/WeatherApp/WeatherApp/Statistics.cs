@@ -3,33 +3,42 @@ namespace WeatherApp
 {
     public class Statistics
     {
-        public float Min { get; private set; }
-        public float Max { get; private set; }
-        public float Sum { get; private set; }
-        public int Count { get; private set; }
-        public float Average { get; private set; }
+        public float MaxValue;
+        public float MinValue;
+        public float SumOfValues;
+        public int CountOfElements;
 
-        private List<float> _Temperatures;
-        public Statistics(List<float> temperatures)
+        public Statistics()
         {
-            this._Temperatures = temperatures;
+            CountOfElements = 0;
+            SumOfValues = 0.0f;
+            MaxValue = float.MinValue;
+            MinValue = float.MaxValue;
         }
-        public void CountStatistics()
+
+        public double AverageValue
         {
-            this.Min = this._Temperatures.Min();
-            this.Max = this._Temperatures.Max();
-            this.Sum = this._Temperatures.Sum();
-            this.Count = this._Temperatures.Count();
-            this.Average = this._Temperatures.Average();
+            get
+            {
+                return SumOfValues / CountOfElements;
+            }
+        }
+
+        public void Add(float value)
+        {
+            SumOfValues += value;
+            CountOfElements += 1;
+            MinValue = Math.Min(value, MinValue);
+            MaxValue = Math.Max(value, MaxValue);
         }
         public override string ToString()
         {
             string result = "STATISTICS OF TEMPERATURES TODAY:\n";
-            result = result + $"Min: {this.Min}\n";
-            result = result + $"Max: {this.Max}\n";
-            result = result + $"Sum: {this.Sum}\n";
-            result = result + $"Count: {this.Count}\n";
-            result = result + $"Average: {this.Average}\n";
+            result = result + $"Min: {this.MinValue}\n";
+            result = result + $"Max: {this.MaxValue}\n";
+            result = result + $"Sum: {this.SumOfValues}\n";
+            result = result + $"Count: {this.CountOfElements}\n";
+            result = result + $"Average: {this.AverageValue.ToString("##.##")}\n";
             return result;
         }
     }

@@ -15,8 +15,8 @@ namespace WeatherApp.Tests
                 sum += tabOfTestValues[i];
             }
             Statistics statFromMem = weatherMemory.GetStatistics();
-            Assert.AreEqual(sum, statFromMem.Sum);
-            Assert.AreEqual(tabOfTestValues.Length, statFromMem.Count);
+            Assert.AreEqual(sum, statFromMem.SumOfValues);
+            Assert.AreEqual(tabOfTestValues.Length, statFromMem.CountOfElements);
         }
 
         [Test]
@@ -32,8 +32,8 @@ namespace WeatherApp.Tests
                 sum += tabOfTestValues[i];
             }
             Statistics statFromFile1 = weatherFile.GetStatistics();
-            Assert.AreEqual(statFromFile.Sum + sum, statFromFile1.Sum);
-            Assert.AreEqual(statFromFile.Count + tabOfTestValues.Length, statFromFile1.Count);
+            Assert.AreEqual(statFromFile.SumOfValues + sum, statFromFile1.SumOfValues);
+            Assert.AreEqual(statFromFile.CountOfElements + tabOfTestValues.Length, statFromFile1.CountOfElements);
         }
        
     }
