@@ -28,7 +28,7 @@ namespace WeatherApp
 
         public override Statistics GetStatistics()
         {
-            var _Temperatures = new List<float>();
+            var temperatures = new List<float>();
             if (File.Exists(fileName))
             {
                 using (var reader = File.OpenText(fileName))
@@ -37,15 +37,15 @@ namespace WeatherApp
                     while (line != null)
                     {
                         if (float.TryParse(line, out float value))
-                            _Temperatures.Add(value);
+                            temperatures.Add(value);
                         else
                             throw new Exception("Invalid grade format in file {fileName}");
                         line = reader.ReadLine();
                     }
                 }
-                if (_Temperatures.Count > 0)
+                if (temperatures.Count > 0)
                 {
-                    Statistics result = new Statistics(_Temperatures);
+                    Statistics result = new Statistics(temperatures);
                     result.CountStatistics();
                     return result;
                 }
