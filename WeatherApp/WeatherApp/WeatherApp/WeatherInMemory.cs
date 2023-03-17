@@ -3,20 +3,20 @@ namespace WeatherApp
 {
     public class WeatherInMemory : WeatherBase
     {
-        private List<float> Temperatures;
+        private List<float> temperatures;
+        protected override event TemperatureAddedDelegate TemperatureAdded;
+
         public WeatherInMemory(string date) : base(date)
         {
-            Temperatures = new List<float>();
+            temperatures = new List<float>();
             TemperatureAdded += PrintEvent;
         }
 
-        protected override event TemperatureAddedDelegate TemperatureAdded;
-
         public override void AddTemperature(float value)
         {
-            if (value>=-50 && value<=50)
+            if (value >= -50 && value <= 50)
             {
-                this.Temperatures.Add(value);
+                this.temperatures.Add(value);
                 if (this.TemperatureAdded != null)
                     this.TemperatureAdded(this, new EventArgs());
             }
@@ -27,10 +27,11 @@ namespace WeatherApp
         public override Statistics GetStatistics()
         {
             Statistics statistics = new Statistics();
-            foreach (var item in Temperatures)
+            foreach (var item in temperatures)
                 statistics.Add(item);
             return statistics;
         }
+
         public override void PrintEvent(object sender, EventArgs args)
         {
             Console.WriteLine("Temperature value added to memory.\n");

@@ -31,6 +31,7 @@ namespace WeatherApp
             MinValue = Math.Min(value, MinValue);
             MaxValue = Math.Max(value, MaxValue);
         }
+
         public override string ToString()
         {
             string result = "STATISTICS OF TEMPERATURES TODAY:\n";

@@ -1,11 +1,9 @@
 ﻿
 using WeatherApp;
 
-
 string currentDate = DateTime.UtcNow.ToString("yyyy-MM-dd");
 WriteLineColor(ConsoleColor.Green, "WELCOME IN MY PROGRAM FOR WEATHER STATISTICS.!\n");
 Console.WriteLine("Choose one of the following options:\n");
-
 Console.WriteLine("M or m - mode for adding temperatures in memory");
 Console.WriteLine("F or f - mode for adding temperatures in file");
 Console.WriteLine("S or s - to stop adding and to show temperatures statistics and quit the program");
@@ -28,7 +26,7 @@ switch (option)
         break;
 }
 
- static void WriteLineColor(ConsoleColor color, string text)
+static void WriteLineColor(ConsoleColor color, string text)
 {
     Console.ForegroundColor = color;
     Console.WriteLine(text);
@@ -36,9 +34,8 @@ switch (option)
 }
 
 static void AddValuesToMemory(string currentDate)
-{   
+{
     WeatherInMemory weatherMemory = new WeatherInMemory(currentDate);
-
     WriteLineColor(ConsoleColor.Green, "Write value, for example: 35,1");
     string lineToMemory = Console.ReadLine();
     while (lineToMemory.ToUpper() != "S")
@@ -47,11 +44,9 @@ static void AddValuesToMemory(string currentDate)
         { weatherMemory.AddTemperature(lineToMemory); }
         catch (Exception ex)
         { WriteLineColor(ConsoleColor.Red, $"Exeption catched: {ex.Message}\n"); }
-
         WriteLineColor(ConsoleColor.Green, "Write next value or type S to see statictic.");
         lineToMemory = Console.ReadLine();
     }
-
     Statistics statFromMem = weatherMemory.GetStatistics();
     PrintStatistiscAndQuit(currentDate, statFromMem.ToString());
 }
@@ -59,7 +54,6 @@ static void AddValuesToMemory(string currentDate)
 static void AddValuesToFile(string currentDate)
 {
     WeatherInFile weatherFile = new WeatherInFile(currentDate);
-
     WriteLineColor(ConsoleColor.Green, "Write value, for example: 35,1");
     string lineToFile = Console.ReadLine();
     while (lineToFile.ToUpper() != "S")
@@ -67,15 +61,13 @@ static void AddValuesToFile(string currentDate)
         try { weatherFile.AddTemperature(lineToFile); }
         catch (Exception ex)
         { WriteLineColor(ConsoleColor.Red, $"Exeption catched: {ex.Message}\n"); }
-
         WriteLineColor(ConsoleColor.Green, "Write next value or type S to see statictic.");
         lineToFile = Console.ReadLine();
     }
-
     Statistics statFromFile = weatherFile.GetStatistics();
     PrintStatistiscAndQuit(currentDate, statFromFile.ToString());
-
 }
+
 static void PrintStatistiscAndQuit(string currentDate, string gotStatistics)
 {
     WriteLineColor(ConsoleColor.DarkMagenta, "\nTODAY: " + currentDate);
